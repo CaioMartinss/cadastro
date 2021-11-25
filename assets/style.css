@@ -26,7 +26,7 @@ form label, form legend{
     display: block;
     margin: 0 0 15px;
     padding: 10px 80px;
-    width: 50%;
+    width: 65%;
 }
 
 .checkbox{
@@ -34,7 +34,7 @@ form label, form legend{
 }
 
 .enviar{
-    width: 40%;
+    width: 41%;
     padding: 15px 0;
     background-color:limegreen;
     color: white;
@@ -49,5 +49,5 @@ form label, form legend{
 
 .enviar:hover{
     background-color: mediumseagreen;
-    transform:scale(1.2)
+    transform:scale(1.1)
 }
