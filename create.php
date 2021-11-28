@@ -8,6 +8,7 @@ require 'mysql.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nomeErro = null;
     $senhaErro = null;
+    $senha2Erro = null;
     $data_nascimentoErro = null;
     $emailErro = null;
     $sexoErro = null;
@@ -25,13 +26,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 
+        if (!empty($_POST['confirmar_senha'])) {
+            $senha = $_POST['confirmar_senha'];
+        } else {
+            $senha2Erro = 'Por favor digite uma senha(2) válida!';
+            $validacao = false;
+        }
+
         if (!empty($_POST['senha'])) {
             $senha = $_POST['senha'];
         } else {
             $senhaErro = 'Por favor digite uma senha válida!';
             $validacao = false;
         }
-
 
         if (!empty($_POST['data_nascimento'])) {
             $data_nascimento = $_POST['data_nascimento'];
@@ -83,18 +90,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ";
             $q = $mysql->prepare($sql);
             $q->execute(array($nome, $sexo, $data_nascimento,$email,md5($senha)));
-
         } catch (PDOException $Exception) {
             $sexoErro = 'Erro no cadastro 1!';
         }
         //
-        MySQL::desconectar();        
+        MySQL::desconectar();
         echo '<script type="text/JavaScript">
         redirectTime = "1000";
         redirectURL = "index.php";
         function timedRedirect() {
             setTimeout("location.href = redirectURL;",redirectTime);
-            alert("deu certo");
+            alert("Cadastro realizado com sucesso, será redirecionado para tela de login");
         }
         timedRedirect();
         </script>';
@@ -110,7 +116,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="utf-8">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
     <title>Registrando</title>
+
+    <!--Verificando o meu formulário-->
+    <script language="javascript">
+      function valida_dados (nomeform)
+     {
+        if (nomeform.senha.value.length<2 || nomeform.senha.value.length>20)//verifica o comprimento da string
+          {
+              alert ("A senha deve conter entre 2 a 20 caracteres.");
+              return false;
+          }
+        if (nomeform.senha.value != nomeform.confirmar_senha.value) //verifica se as senhas são iguais
+          {
+            alert ("Senhas não coincidem!");
+            return false;
+          }
+    return true
+        }
+    </script>
 </head>
 
 <body>
@@ -121,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <h3 class="well"> Registro </h3>
             </div>
             <div class="card-body">
-                <form class="form-horizontal" action="create.php" method="post">
+                <form class="form-horizontal" action="create.php" method="post" onSubmit="return valida_dados(this)">
 
                     <div class="control-group  <?php echo !empty($nomeErro) ? 'error ' : ''; ?>">
                         <label class="control-label">Nome</label>
@@ -150,12 +175,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="controls">
                             <input size="20" class="form-control" name="senha" type="password" placeholder="Senha"
                                    value="<?php echo !empty($senha) ? $senha : ''; ?>">
-                            <?php if (!empty($emailErro)): ?>
+                            <?php if (!empty($senhaErro)): ?>
                                 <span class="text-danger"><?php echo $senhaErro; ?></span>
                             <?php endif; ?>
                         </div>
                     </div>
                     
+                    <div class="control-group <?php echo !empty($senha2Erro) ? 'error ' : ''; ?>">
+                        <label class="control-label">Confirme sua senha</label>
+                        <div class="controls">
+                            <input size="20" class="form-control" name="confirmar_senha" type="password" placeholder="Senha"
+                                   value="<?php echo !empty($senha2) ? $senha2 : ''; ?>">
+                            <?php if (!empty($senha2Erro)): ?>
+                                <span class="text-danger"><?php echo $senha2Erro; ?></span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
                     <div class="control-group <?php echo !empty($data_nascimentoErro) ? 'error ' : ''; ?>">
                         <label class="control-label">Data de Nascimento</label>
                         <div class="controls">
