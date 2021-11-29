@@ -83,6 +83,12 @@ if(isset($_POST['email']) && isset($_POST['senha']))
 
 <body>
 <div class="container">
+<div class="row">
+        <div>
+               <h2>Engenharia de Software &#9881;</h2>
+            </div>
+          </div>
+            </br>
     <div clas="span10 offset1">
         <div class="card">
             <div class="card-header">
@@ -118,7 +124,8 @@ if(isset($_POST['email']) && isset($_POST['senha']))
                     <div class="form-actions">
                         <br/>
                        <button type="submit" class="btn btn-success">Entrar</button>
-                        <a href="create.php" class="btn btn-success">Registrar-se<a>
+                        <a href="create.php" class="btn btn-success">Registrar-se</a>
+                        <a href="./documentação/Index.html" target="new" class="btn btn-danger">ACESSAR DOCUMENTAÇÂO</a>
                     </div>
 
                 </form>

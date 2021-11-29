@@ -44,6 +44,12 @@ if (!empty($_POST)) {
 
     <body>
         <div class="container">
+        <div class="row">
+        <div>
+               <h2>Engenharia de Software &#9881;</h2>
+            </div>
+          </div>
+            </br>
             <div class="span10 offset1">
                 <div class="row">
                     <h3 class="well">Excluir Contato</h3>

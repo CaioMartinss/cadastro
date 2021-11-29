@@ -15,7 +15,7 @@
         <div class="container">
         <div class="row">
         <div>
-               <h2>Engenharia de Software &#9881; &#9773;</h2>
+               <h2>Engenharia de Software &#9881;</h2>
             </div>
           </div>
             </br>

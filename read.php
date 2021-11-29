@@ -50,10 +50,16 @@ if (null == $id) {
 
 <body>
 <div class="container">
+<div class="row">
+        <div>
+               <h2>Engenharia de Software &#9881;</h2>
+            </div>
+          </div>
+            </br>
     <div class="span10 offset1">
         <div class="card">
             <div class="card-header">
-                <h3 class="well">Informações do Contato</h3>
+                <h3 class="well">Informações de de cadastro</h3>
             </div>
             <div class="container">
                 <div class="form-horizontal">
